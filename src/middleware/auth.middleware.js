@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/UserSchema.js";
+import User from "../models/user.model.js";
 
 const checker = async (req, res, next) => {
   const token = req.headers.bearer;

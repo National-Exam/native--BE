@@ -1,6 +1,5 @@
-import { omit } from "lodash";
 import jwt from "jsonwebtoken";
-import User from "../models/UserSchema.js";
+import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
 export async function createUserHandler(req, res) {
   try { 
@@ -10,7 +9,7 @@ export async function createUserHandler(req, res) {
       return res.status(409).send("User already exists");
     }  
     const user = await createUser(req.body);    
-    return res.status(201).send(omit(user.toJSON(), "password"));
+    return res.status(201).send(user.toJSON());
   } catch (e) {
     log.error(e);
     return res.status(409).send(e.message);

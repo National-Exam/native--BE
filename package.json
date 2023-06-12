@@ -7,7 +7,7 @@
   "author": "chainerprince <mutegetsi2000@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon --exec babel-node src/app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -19,6 +19,9 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
     "nodemon": "^2.0.22"
   }
 }

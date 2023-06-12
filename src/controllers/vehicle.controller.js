@@ -1,4 +1,4 @@
-import Vehicle from "../models/Vehicle.js";
+import Vehicle from "../models/vehicle.model.js";
 
 // create a vehicle
 export async function createVehicle(req, res) {
