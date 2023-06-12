@@ -1,0 +1,19 @@
+{
+  "name": "vehicle",
+  "version": "1.0.0",
+  "description": "The vehicle management app",
+  "main": "app.js",
+  "type": "module",
+  "author": "chainerprince <mutegetsi2000@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
