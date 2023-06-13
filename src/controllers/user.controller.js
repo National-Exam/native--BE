@@ -8,10 +8,11 @@ export async function createUserHandler(req, res) {
     if (existingUser) {
       return res.status(409).send("User already exists");
     }  
-    const user = await createUser(req.body);    
+    const user = await User.create(req.body);   
+    delete user._doc.password; 
     return res.status(201).send(user.toJSON());
   } catch (e) {
-    log.error(e);
+    console.error(e);
     return res.status(409).send(e.message);
   }
 }
@@ -26,8 +27,7 @@ export const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
+    }  
     // Compare passwords
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
