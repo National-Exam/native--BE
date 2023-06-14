@@ -18,4 +18,11 @@ export const vehicleSchema = yup.object().shape({
     .required("Year is required")
     .positive("Year must be a positive number"),
 });
+export const ownerSchema = yup.object().shape({
+  firstName: yup.string().required("Firstname is required"),
+  lastName: yup.string().required("Last name is required"),  
+  phone: yup.string(),  
+  address: yup.string(),  
+  nationalId: yup.string().min(16).max(16).required("National id is required"),  
+});
 

@@ -2,15 +2,16 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
 const checker = async (req, res, next) => {
-  const token = req.headers.bearer;
-
+  const authHeader = req.headers.authorization;  
   try {
-    if (!token) {
+    if (!authHeader) {
       throw new Error("No token sent");
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded._id);
+    const token = authHeader.split(" ")[1]; // Extract the token from the Authorization header
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);    
+    const user = await User.findById(decoded.userId);
 
     if (!user) {
       throw new Error("Not authorized");
