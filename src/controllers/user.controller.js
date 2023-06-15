@@ -16,6 +16,17 @@ export async function createUserHandler(req, res) {
     return res.status(409).send(e.message);
   }
 }
+export async function getUserDetails(req, res) {
+  try { 
+    const user = req.user;
+    if(user)
+      return res.status(200).send(user);
+    return res.status(404).send("User not found");
+  } catch (e) {
+    console.error(e);
+    return res.status(409).send(e.message);
+  }
+}
 
 
 // Login user and generate JWT token
