@@ -176,7 +176,7 @@ router.get("/:vehicleId", getVehicleById);
  *         description: Internal server error
  */
 
-router.post("/", checker,validateBody(vehicleSchema), roleMiddleware("admin"), createVehicle);
+router.post("/", checker,validateBody(vehicleSchema), createVehicle);
 // Update a vehicle
 /**
  * @swagger

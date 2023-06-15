@@ -1,15 +1,28 @@
 import mongoose from "mongoose";
 
 const vehicleSchema = new mongoose.Schema({
-  make: {
+  chasisNumber: {
     type: String,
     required: true,
+  },
+  plateNumber: {
+    type: String,
+    required: true,
+    unique: true,
   },
   model: {
     type: String,
     required: true,
   },
-  year: {
+  price: {
+    type: String,
+    required: true,
+  },
+  mfgCompany: {
+    type: String,
+    required: true,
+  },
+  mfgYear: {
     type: Number,
     required: true,
   },

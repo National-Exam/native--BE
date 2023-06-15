@@ -1,17 +1,28 @@
 import Vehicle from "../models/vehicle.model.js";
-
+import Owner from "../models/owners.model.js";
+import { generateSequentialString } from "../utils/generatePlateNumber.js";
 // create a vehicle
 export async function createVehicle(req, res) {
   try {
-    const { make, model, year } = req.body;
-    const { userId } = req.user; // userId is stored in req.user from authentication middleware
-
+    const { mfgYear, chasisNumber, mfgCompany, owner, model, plateNumber,price } =
+      req.body;   
+    const vehicleOwner = await Owner.findOne({nationalId:owner})
+    if(!vehicleOwner){
+      return res.status(400).send("The owner don't exist");
+    }
+    const lastRegisteredVehicle = await Vehicle.findOne().sort({_id:-1}).limit(1);    
+    const lastVehiclePlateNumber = lastRegisteredVehicle?.plateNumber;
+    const generatedPlateNumber = generateSequentialString(lastVehiclePlateNumber);    
     // Create a new vehicle
+    const newPlateNumber = (plateNumber?.length != 0) ? plateNumber : generatedPlateNumber;    
     const vehicle = await Vehicle.create({
-      make,
+      mfgYear,
+      chasisNumber,
+      mfgCompany,
+      owner: vehicleOwner._id,
+      price,
       model,
-      year,
-      owner: userId,
+      plateNumber: newPlateNumber,
     });
 
     return res.status(201).json(vehicle);

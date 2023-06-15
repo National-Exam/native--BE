@@ -11,12 +11,13 @@ export const loginSchema = yup.object().shape({
 });
 
 export const vehicleSchema = yup.object().shape({
-  make: yup.string().required("Make is required"),
+  chasisNumber: yup.string().required("Chasis number is required"),
+  mfgCompany: yup.string().required("Manufacture company is required"),
+  mfgYear: yup.string().required("Manufacture year is required"),
+  price: yup.string().required("Price is required"),
+  plateNumber: yup.string(),
   model: yup.string().required("Model is required"),
-  year: yup
-    .number()
-    .required("Year is required")
-    .positive("Year must be a positive number"),
+  owner: yup.string().min(16).max(16).required("Owner is required"),
 });
 export const ownerSchema = yup.object().shape({
   firstName: yup.string().required("Firstname is required"),
