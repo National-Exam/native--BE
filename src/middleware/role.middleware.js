@@ -4,7 +4,7 @@ export function roleMiddleware(allowedRoles) {
       const user = req.user; // Assuming the authenticated user is stored in the `req.user` property
 
       // Check if the user has any of the allowed roles
-      const hasRole = allowedRoles.some((role) => user.roles.includes(role));
+      const hasRole = allowedRoles.filter((role) => user.roles.includes(role));
       if (!hasRole) {
         return res.status(403).send("Access denied");
       }
