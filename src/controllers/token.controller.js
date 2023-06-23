@@ -29,7 +29,8 @@ export async function createToken(req, res) {
 // Get all tokens
 export async function getAllTokens(req, res) {
   try {
-    const tokens = await PurchasedToken.find();
+    const meter_number = req.query.meter_number;
+    const tokens = await PurchasedToken.find({meter_number});
     return res.status(200).json(tokens);
   } catch (error) {
     console.error("Error fetching tokens:", error);
@@ -39,10 +40,10 @@ export async function getAllTokens(req, res) {
 // validate token
 export async function validateToken(req, res) {
   try {
-    const {meter_number} = req.body;
-    const token = await PurchasedToken.findOne({meter_number});
-    console.log(token, 'the token')
-    return res.status(200).json(token);
+    const {token} = req.body;
+    const tokenResponse = await PurchasedToken.findOne({token});
+    console.log(tokenResponse, 'the tokenResponse')
+    return res.status(200).json(tokenResponse);
   } catch (error) {
     console.error("Error fetching token:", error);
     return res.status(500).send("Internal server error");
